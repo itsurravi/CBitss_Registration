@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CBitss Registration</string>
+
+    <!--activity_main-->
+    <string name="phone_number">Enter Phone Number Here</string>
+    <string name="whatsapp_number">Enter Whatsapp Number Here</string>
+    <string name="course">Enter Course Here</string>
+    <string name="name">Enter Name Here</string>
+
+</resources>

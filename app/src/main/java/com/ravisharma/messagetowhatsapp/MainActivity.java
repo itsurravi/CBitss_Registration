@@ -192,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     i.putExtra("num2", num2);
                     i.putExtra("course", course);
                     startActivity(i);
+                    e1.setText("");
+                    e2.setText("");
+                    e3.setText("");
+                    e4.setText("");
                 }
             } catch (Exception e) {
                 Toast.makeText(this, "Enter Valid Pin", Toast.LENGTH_SHORT).show();

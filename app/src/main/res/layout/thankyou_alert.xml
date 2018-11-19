@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/thank"
-        android:src="@drawable/thank"
+        android:src="@drawable/d"
         android:layout_width="200dp"
         android:layout_height="200dp" />
 

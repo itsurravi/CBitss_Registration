@@ -4,135 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/abc"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <ScrollView
-            android:layout_weight="1"
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginEnd="190dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/cbitss" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/cbitss" />
-
-                <android.support.design.widget.TextInputLayout
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
+                    android:ems="14"
+                    android:hint="@string/name"
+                    android:inputType="textCapWords" />
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="14"
-                        android:hint="@string/name"
-                        android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
 
-                </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
-                <android.support.design.widget.TextInputLayout
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:ems="14"
+                    android:hint="@string/phone_number"
+                    android:inputType="number"
+                    android:maxLength="10" />
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="14"
-                        android:hint="@string/phone_number"
-                        android:inputType="number"
-                        android:maxLength="10" />
+            </android.support.design.widget.TextInputLayout>
 
-                </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
-                <android.support.design.widget.TextInputLayout
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/whtsapp_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:ems="14"
+                    android:hint="@string/whatsapp_number"
+                    android:inputType="number"
+                    android:maxLength="10" />
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/whtsapp_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="14"
-                        android:hint="@string/whatsapp_number"
-                        android:inputType="number"
-                        android:maxLength="10" />
+            </android.support.design.widget.TextInputLayout>
 
-                </android.support.design.widget.TextInputLayout>
+            <CheckBox
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Same As Phone Number" />
 
-                <CheckBox
-                    android:id="@+id/check"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/course"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Same As Phone Number" />
+                    android:ems="14"
+                    android:hint="@string/course"
+                    android:inputType="textCapSentences" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+            </android.support.design.widget.TextInputLayout>
 
+            <Button
+                android:id="@+id/click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:text="Submit"
+                android:textColor="#fff" />
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/course"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="14"
-                        android:hint="@string/course"
-                        android:inputType="textCapSentences" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/click"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/colorAccent"
-                    android:text="Submit"
-                    android:textColor="#fff" />
-
-                <TextView
-                    android:id="@+id/ofeuse"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="150dp"
-                    android:text="For Office Use"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/ofeuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:text="For Office Use"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
 
-            </LinearLayout>
+        </LinearLayout>
 
-        </ScrollView>
-
-        <ImageView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/abc" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

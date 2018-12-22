@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/abc"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -16,27 +17,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:adjustViewBounds="true"
-                android:src="@drawable/abc" />
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:src="@drawable/abc" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="190dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
                     android:layout_marginBottom="20dp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/cbitss" />
@@ -52,6 +53,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="14"
+                        android:drawableLeft="@drawable/ic_person_name"
+                        android:background="#bababa"
+                        android:drawablePadding="10dp"
                         android:hint="@string/name"
                         android:inputType="textCapWords" />
 
@@ -67,6 +71,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="14"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:background="#bababa"
+                        android:drawablePadding="10dp"
                         android:hint="@string/phone_number"
                         android:inputType="number"
                         android:maxLength="10" />
@@ -83,6 +90,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="14"
+                        android:drawableLeft="@drawable/whatsapp"
+                        android:background="#bababa"
+                        android:drawablePadding="10dp"
                         android:hint="@string/whatsapp_number"
                         android:inputType="number"
                         android:maxLength="10" />
@@ -107,6 +117,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="14"
+                        android:drawableLeft="@drawable/ic_course"
+                        android:background="#bababa"
+                        android:drawablePadding="10dp"
                         android:hint="@string/course"
                         android:inputType="textCapSentences" />
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CBitss Registration</string>
+    <string name="app_name">CBitss Enquiry Form</string>
 
     <!--activity_main-->
     <string name="phone_number">Enter Phone Number Here</string>

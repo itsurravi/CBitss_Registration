@@ -102,7 +102,7 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(i);
             }
         } catch (Exception e) {
-            Log.d("Error_Message", e.getMessage());
+            Toast.makeText(this, "Whatsapp not Installed", Toast.LENGTH_SHORT).show();
         }
     }
 

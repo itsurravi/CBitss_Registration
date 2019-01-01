@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int select = group.getCheckedRadioButtonId();
                     if (select > -1) {
                         next.setEnabled(true);
+                        next.setBackground(getDrawable(R.drawable.button_design_enable));
                     }
                 }
             }

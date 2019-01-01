@@ -5,19 +5,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
+import android.os.PatternMatcher;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static com.ravisharma.messagetowhatsapp.Main2Activity.getDate;
 
@@ -38,36 +44,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static String url = "https://script.google.com/macros/s/AKfycbzE15zANuanQFpd2W1MXxcOYxq9k6gID8UJH14cdUCsxExVcG4H/exec";
     private static String id = "1dSo2kv4_V6cleUhvlAR17nRPUO9Xzi1Pm7nSSynSF5E";
+    boolean radio = true;
+    int card_no = 0;
 
-    TextInputEditText e1, e2, e3, e4;
-    TextView tv, ty_message;
-    Button b, pin_btn;
-    CheckBox box;
+    TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
+    TextView tv, ty_message, c1, c2, c3;
+    Button submit, pin_btn, next;
+    RadioGroup rgroup;
     EditText pin;
+
+    CardView card_name, card_course, card_phone, card_check, card_whatsapp, card_email;
+    ImageView f1, f2, f3;
+
     LayoutInflater li;
     View layout;
     AlertDialog a;
 
-    String date, time, name, num1, num2, course;
+    String date, time, name, num1, num2, course, email;
 
     DB db;
+
+    RadioButton r1, r2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //card id
+        card_name = (CardView) findViewById(R.id.card_name);
+        card_course = (CardView) findViewById(R.id.card_course);
+        card_phone = (CardView) findViewById(R.id.card_phone);
+        card_check = (CardView) findViewById(R.id.card_check);
+        card_whatsapp = (CardView) findViewById(R.id.card_whatsapp);
+        card_email = (CardView) findViewById(R.id.card_email);
 
-        e1 = (TextInputEditText) findViewById(R.id.name);
-        e2 = (TextInputEditText) findViewById(R.id.phone);
-        e3 = (TextInputEditText) findViewById(R.id.whtsapp_number);
-        e4 = (TextInputEditText) findViewById(R.id.course);
+        //imageview id
+        f1 = (ImageView) findViewById(R.id.first);
+        f2 = (ImageView) findViewById(R.id.sec);
+        f3 = (ImageView) findViewById(R.id.third);
+
+        //textview id
+        c1 = (TextView) findViewById(R.id.tfirst);
+        c2 = (TextView) findViewById(R.id.tsec);
+        c3 = (TextView) findViewById(R.id.tthird);
         tv = (TextView) findViewById(R.id.ofeuse);
-        box = (CheckBox) findViewById(R.id.check);
-        b = (Button) findViewById(R.id.click);
 
+        //radiobutton id
+        r1 = (RadioButton) findViewById(R.id.yes);
+        r2 = (RadioButton) findViewById(R.id.no);
+
+        //textinputedittext id
+        name_edit = (TextInputEditText) findViewById(R.id.name);
+        phone_edit = (TextInputEditText) findViewById(R.id.phone);
+        whPhone_edit = (TextInputEditText) findViewById(R.id.whtsapp_number);
+        course_edit = (TextInputEditText) findViewById(R.id.course);
+        email_edit = (TextInputEditText) findViewById(R.id.email);
+
+        //RadioGroup id
+        rgroup = (RadioGroup) findViewById(R.id.rGroup);
+
+        //Button id
+        submit = (Button) findViewById(R.id.click);
+        next = (Button) findViewById(R.id.next);
+
+        next.setEnabled(false);
+        next.setBackground(getDrawable(R.drawable.button_design_disable));
+
+        //ClickListener
         tv.setOnClickListener(this);
-        b.setOnClickListener(this);
+        submit.setOnClickListener(this);
+        next.setOnClickListener(this);
+
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.enter_zoom1);
+        card_name.startAnimation(anim);
+        next.startAnimation(anim);
+
         db = new DB(this);
 
         SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
@@ -79,36 +131,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ed.commit();
         }
 
-        e3.setEnabled(false);
+        textchangeListener();
 
-        e2.addTextChangedListener(new TextWatcher() {
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                e3.setText(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    e3.setText(e2.getText().toString());
-                    e3.setEnabled(false);
-                    e4.requestFocus();
-                } else {
-                    e3.setText("");
-                    e3.setEnabled(true);
-                    e3.requestFocus();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (!next.isEnabled()) {
+                    int select = group.getCheckedRadioButtonId();
+                    if (select > -1) {
+                        next.setEnabled(true);
+                    }
                 }
             }
         });
@@ -116,25 +148,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == b) {
-            name = e1.getText().toString().trim();
-            num1 = e2.getText().toString().trim();
-            num2 = e3.getText().toString().trim();
-            course = e4.getText().toString().trim();
+
+        if (v == submit) {
+            name = name_edit.getText().toString().trim();
+            num1 = phone_edit.getText().toString().trim();
+            num2 = whPhone_edit.getText().toString().trim();
+            course = course_edit.getText().toString().trim();
+            email = email_edit.getText().toString().trim();
+
+            if (name.isEmpty() || num1.isEmpty() || num2.isEmpty() || course.isEmpty()) {
+                Toast.makeText(this, "Please Fill All Values", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (num1.length() < 10 || num2.length() < 10) {
+                Toast.makeText(this, "Please enter Valid Number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(!email.isEmpty() && !(Patterns.EMAIL_ADDRESS.matcher(email).matches()))
+            {
+                Toast.makeText(this, "Enter Valid Email Id", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             Long timing = System.currentTimeMillis();
 
             date = getDate(timing, "dd/MM/yyyy");
             time = getDate(timing, "hh:mm:ss");
-
-            if (name.isEmpty() || num1.isEmpty() || num2.isEmpty() || course.isEmpty()) {
-                Snackbar.make(v, "Please Fill All Values", Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            if (num1.length() < 10 || num2.length() < 10) {
-                Snackbar.make(v, "Please enter Valid Number", Snackbar.LENGTH_LONG).show();
-                return;
-            }
 
             String message = "Hello " + name.toUpperCase() + ", Welcome to CBitss You are ensured for the course of " + course;
 
@@ -192,20 +232,259 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     i.putExtra("num2", num2);
                     i.putExtra("course", course);
                     startActivity(i);
-                    e1.setText("");
-                    e2.setText("");
-                    e3.setText("");
-                    e4.setText("");
+                    name_edit.setText("");
+                    phone_edit.setText("");
+                    whPhone_edit.setText("");
+                    course_edit.setText("");
                 }
             } catch (Exception e) {
                 Toast.makeText(this, "Enter Valid Pin", Toast.LENGTH_SHORT).show();
             }
-
             if (a.isShowing()) {
                 a.dismiss();
             }
-
         }
+
+        if (v == next) {
+            showCard();
+        }
+    }
+
+    private void textchangeListener() {
+        name_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count > 0) {
+                    next.setEnabled(true);
+                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+                } else {
+                    next.setEnabled(false);
+                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        phone_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                whPhone_edit.setText(s.toString());
+                if (count > 0) {
+                    next.setEnabled(true);
+                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+                } else {
+                    next.setEnabled(false);
+                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        whPhone_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (whPhone_edit.isEnabled()) {
+                    if (count > 0) {
+                        next.setEnabled(true);
+                        next.setBackground(getDrawable(R.drawable.button_design_enable));
+                    } else {
+                        next.setEnabled(false);
+                        next.setBackground(getDrawable(R.drawable.button_design_disable));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        course_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count > 0) {
+                    next.setEnabled(true);
+                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+                } else {
+                    next.setEnabled(false);
+                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        email_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count > 0) {
+                    submit.setEnabled(true);
+                    submit.setBackground(getDrawable(R.drawable.button_design_enable));
+                } else {
+                    submit.setEnabled(false);
+                    submit.setBackground(getDrawable(R.drawable.button_design_disable));
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        whPhone_edit.setEnabled(false);
+    }
+
+    private void showCard() {
+
+        if (card_check.getVisibility() == View.VISIBLE) {
+            if (radio) {
+                int selectedId = rgroup.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton) findViewById(selectedId);
+                if (selectedId == -1) {
+                    Toast.makeText(this, "Please Choose an Option", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    if (rb.getText().toString().equals("Yes")) {
+                        card_no++;
+                        Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.exit_to_right);
+                        next.startAnimation(anim);
+                        next.setVisibility(View.GONE);
+
+                    } else if (rb.getText().toString().equals("No")) {
+                        whPhone_edit.setText("");
+                        whPhone_edit.setEnabled(true);
+                        whPhone_edit.requestFocus();
+                    }
+                    radio = false;
+                    rgroup.setEnabled(false);
+                    r1.setEnabled(false);
+                    r2.setEnabled(false);
+
+                }
+            }
+        }
+
+        switch (card_no) {
+            case 0:
+                card_no++;
+                f1.setVisibility(View.VISIBLE);
+                f2.setVisibility(View.VISIBLE);
+                f3.setVisibility(View.VISIBLE);
+                image_animation_start();
+                card_course.setVisibility(View.VISIBLE);
+                course_edit.requestFocus();
+                next.setEnabled(false);
+                next.setBackground(getDrawable(R.drawable.button_design_disable));
+                card_course.startAnimation(setZoomAnimation());
+                break;
+            case 1:
+                card_no++;
+                image_animation_start();
+                card_phone.setVisibility(View.VISIBLE);
+                phone_edit.requestFocus();
+                next.setEnabled(false);
+                next.setBackground(getDrawable(R.drawable.button_design_disable));
+                card_phone.startAnimation(setZoomAnimation());
+                break;
+            case 2:
+                card_no++;
+                image_animation_start();
+                next.setEnabled(false);
+                next.setBackground(getDrawable(R.drawable.button_design_disable));
+                card_check.setVisibility(View.VISIBLE);
+                card_check.startAnimation(setZoomAnimation());
+                break;
+            case 3:
+                card_no++;
+                image_animation_start();
+                whPhone_edit.requestFocus();
+                next.setEnabled(false);
+                next.setBackground(getDrawable(R.drawable.button_design_disable));
+                card_whatsapp.setVisibility(View.VISIBLE);
+                card_whatsapp.startAnimation(setZoomAnimation());
+                break;
+            case 4:
+                Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.exit_to_right);
+                next.startAnimation(anim);
+                next.setVisibility(View.GONE);
+                card_no++;
+                image_animation_start();
+                submit.setVisibility(View.VISIBLE);
+                submit.setEnabled(false);
+                submit.setBackground(getDrawable(R.drawable.button_design_disable));
+                email_edit.requestFocus();
+                card_email.setVisibility(View.VISIBLE);
+                card_email.startAnimation(setZoomAnimation());
+
+                break;
+        }
+    }
+
+    private Animation setZoomAnimation() {
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.enter_zoom);
+        return anim;
+    }
+
+    private void image_animation_start() {
+
+        Animation img_3 = AnimationUtils.loadAnimation(this, R.anim.img_3_start);
+        Animation img_2 = AnimationUtils.loadAnimation(this, R.anim.img_2_start);
+        Animation img_1 = AnimationUtils.loadAnimation(this, R.anim.img_1_start);
+
+        Animation anim_1 = AnimationUtils.loadAnimation(this, R.anim.text1);
+        Animation anim_2 = AnimationUtils.loadAnimation(this, R.anim.text2);
+        Animation anim_3 = AnimationUtils.loadAnimation(this, R.anim.text3);
+
+        c1.setVisibility(View.VISIBLE);
+        c2.setVisibility(View.VISIBLE);
+        c3.setVisibility(View.VISIBLE);
+
+        f1.startAnimation(img_3);
+        f2.startAnimation(img_2);
+        f3.startAnimation(img_1);
+
+        c1.startAnimation(anim_3);
+        c2.startAnimation(anim_2);
+        c3.startAnimation(anim_1);
     }
 
     private void showThankYouMessage() {
@@ -213,9 +492,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         LayoutInflater l = LayoutInflater.from(this);
         View v = l.inflate(R.layout.thankyou_alert, null);
+
         ty_message = (TextView) v.findViewById(R.id.msg);
         ty_message.setText(text);
         b.setView(v);
+
         final AlertDialog d = b.create();
         d.setCancelable(false);
         d.show();
@@ -227,10 +508,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     insertIntoSheet();
                 }
             }
-        }, 7000);
+        }, 5000);
     }
 
     private void insertIntoSheet() {
+        if (email.isEmpty()) {
+            email = "Not Available";
+        }
         final ProgressDialog d = new ProgressDialog(this);
         d.setMessage("Please Wait...");
         d.setCancelable(false);
@@ -261,6 +545,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 m.put("mobile", num1);
                 m.put("whatsapp", num2);
                 m.put("course", course);
+                m.put("email", email);
                 return m;
             }
         };
@@ -268,6 +553,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RequestQueue r = Volley.newRequestQueue(this);
         r.add(request);
     }
-
-
 }

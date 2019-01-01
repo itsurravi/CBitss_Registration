@@ -7,225 +7,339 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/enquiry"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="40dp"
+            android:background="@color/enquiry_back"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:adjustViewBounds="true"
-                android:src="@drawable/abc" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="490dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="7dp"
-                        app:cardUseCompatPadding="true">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/text_field_design"
-                            android:orientation="vertical"
-                            android:paddingBottom="10dp">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:id="@+id/name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/ic_person_name"
-                                android:drawablePadding="10dp"
-                                android:ems="15"
-                                android:hint="@string/name"
-                                android:inputType="textCapWords" />
-
-                        </android.support.design.widget.TextInputLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="7dp"
-                        app:cardUseCompatPadding="true">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/text_field_design"
-                            android:paddingBottom="10dp">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:id="@+id/course"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/ic_course"
-                                android:drawablePadding="10dp"
-                                android:ems="15"
-                                android:hint="@string/course"
-                                android:inputType="textCapSentences" />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="7dp"
-                        app:cardUseCompatPadding="true">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/text_field_design"
-                            android:paddingBottom="10dp">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:id="@+id/phone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/ic_phone"
-                                android:drawablePadding="10dp"
-                                android:ems="15"
-                                android:hint="@string/phone_number"
-                                android:inputType="number"
-                                android:maxLength="10" />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        app:cardCornerRadius="4dp"
-                        app:cardElevation="7dp"
-                        app:cardUseCompatPadding="true">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/text_field_design"
-                            android:paddingBottom="10dp">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:id="@+id/whtsapp_number"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/whatsapp"
-                                android:drawablePadding="10dp"
-                                android:ems="15"
-                                android:hint="@string/whatsapp_number"
-                                android:inputType="number"
-                                android:maxLength="10" />
-
-                        </android.support.design.widget.TextInputLayout>
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:checked="true"
-                    android:text="WhatsApp Number Same As Phone Number"
-                    android:textColor="#fff" />
-
-
-                <Button
-                    android:id="@+id/click"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_design"
-                    android:text="Submit"
-                    android:textColor="@color/colorPrimary" />
-
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="250dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginBottom="33dp"
-                android:layout_marginTop="500dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/cbitss" />
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="200dp"
+                android:text="Enquiry Form"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/ofeuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="250dp"
+                android:text="For Office Use"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:visibility="gone" />
 
-    </ScrollView>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/ofeuse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="For Office Use"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/first"
+            android:src="@drawable/fb1"
+            android:visibility="gone"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+        <TextView
+            android:id="@+id/tfirst"
+            android:visibility="gone"
+            android:layout_marginStart="40dp"
+            android:layout_below="@id/first"
+            android:layout_marginTop="10dp"
+            android:text="Content 1"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/sec"
+            android:src="@drawable/fb2"
+            android:visibility="gone"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="280dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+
+        <TextView
+            android:id="@+id/tsec"
+            android:visibility="gone"
+            android:layout_marginStart="40dp"
+            android:layout_below="@id/sec"
+            android:layout_marginTop="10dp"
+            android:text="Content 2"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/third"
+            android:src="@drawable/fb3"
+            android:visibility="gone"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="480dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+
+        <TextView
+            android:id="@+id/tthird"
+            android:visibility="gone"
+            android:layout_marginStart="40dp"
+            android:layout_below="@id/third"
+            android:layout_marginTop="10dp"
+            android:text="Content 3"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/main_layout"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="800dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginStart="340dp"
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="430dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/text_field_design"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_person_name"
+                        android:drawablePadding="10dp"
+                        android:ems="18"
+                        android:hint="@string/name"
+                        android:inputType="textCapWords" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_course"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="430dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/text_field_design"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/course"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_course"
+                        android:drawablePadding="10dp"
+                        android:ems="18"
+                        android:hint="@string/course"
+                        android:inputType="textCapSentences" />
+
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/card_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="430dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/text_field_design"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="10dp"
+                        android:ems="18"
+                        android:hint="@string/phone_number"
+                        android:inputType="number"
+                        android:maxLength="10" />
+
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_check"
+                android:visibility="gone"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:paddingStart="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Are you Using Same Number On Whatsapp?"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:id="@+id/rGroup"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="140dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/yes"
+                        android:text="Yes"
+                        android:layout_marginEnd="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <RadioButton
+                        android:id="@+id/no"
+                        android:text="No"
+                        android:layout_marginStart="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RadioGroup>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/card_whatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="430dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/text_field_design"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/whtsapp_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/whatsapp"
+                        android:drawablePadding="10dp"
+                        android:ems="18"
+                        android:hint="@string/whatsapp_number"
+                        android:inputType="number"
+                        android:maxLength="10" />
+
+                </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/card_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="430dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/text_field_design"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:drawablePadding="10dp"
+                        android:ems="18"
+                        android:hint="@string/email"
+                        android:inputType="textCapWords" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_design_enable"
+                android:text="Next"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/click"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:background="@drawable/button_design_enable"
+                android:text="Submit"
+                android:textColor="@color/colorPrimary" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

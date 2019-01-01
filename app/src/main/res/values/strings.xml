@@ -6,5 +6,9 @@
     <string name="whatsapp_number">Enter Whatsapp Number Here</string>
     <string name="course">Enter Course Here</string>
     <string name="name">Enter Name Here</string>
+    <string name="email">Enter Email Here (Optional)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

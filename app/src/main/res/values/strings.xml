@@ -2,11 +2,11 @@
     <string name="app_name">CBitss Enquiry Form</string>
 
     <!--activity_main-->
-    <string name="phone_number">Enter Phone Number Here</string>
-    <string name="whatsapp_number">Enter Whatsapp Number Here</string>
-    <string name="course">Enter Course Here</string>
-    <string name="name">Enter Name Here</string>
-    <string name="email">Enter Email Here (Optional)</string>
+    <string name="phone_number">Enter Phone Number</string>
+    <string name="whatsapp_number">Enter Whatsapp Number</string>
+    <string name="course">Enter Course</string>
+    <string name="name"><font size="30">Enter Name</font> </string>
+    <string name="email">Enter Email</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

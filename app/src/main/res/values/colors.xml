@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#324f88</color>
-    <color name="colorPrimaryDark">#1c2c4d</color>
-    <color name="colorAccent">#ec0a0a</color>
+    <color name="colorPrimary">#E4572E</color>
+    <color name="colorPrimaryDark">#BE185B</color>
+    <color name="colorAccent">#E4572E</color>
+    <color name="hint">#A4E4572E</color>
+
     <color name="uncompleted_text_color">#ffffff</color>
+    <color name="white">#ffffff</color>
     <color name="completer_text_color">#00f138</color>
     <color name="attention">#ffff00</color>
     <color name="default_icon">#c4c4c4</color>

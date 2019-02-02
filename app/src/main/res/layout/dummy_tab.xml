@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,135 +7,284 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/main_back_image"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/cbitss" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_height="150dp"
-                android:layout_marginBottom="20dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/cbitss" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:hint="@string/name"
-                    android:inputType="textCapWords" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:hint="@string/phone_number"
-                    android:inputType="number"
-                    android:maxLength="10" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/whtsapp_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:hint="@string/whatsapp_number"
-                    android:inputType="number"
-                    android:maxLength="10" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <CheckBox
-                android:id="@+id/check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Same As Phone Number" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/course"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:hint="@string/course"
-                    android:inputType="textCapSentences" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:hint="@string/email"
-                    android:inputType="textCapSentences" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/click"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorAccent"
-                android:text="Submit"
-                android:textColor="#fff" />
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="250dp"
+                android:text="Enquiry Form"
+                android:textColor="@color/colorPrimary"
+                android:textSize="45dp" />
 
             <TextView
                 android:id="@+id/ofeuse"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:text="For Office Use"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/first"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:src="@drawable/img1" />
 
-    </ScrollView>
+            <ImageView
+                android:id="@+id/sec"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="180dp"
+                android:src="@drawable/img2" />
 
-</android.support.design.widget.CoordinatorLayout>
+            <ImageView
+                android:id="@+id/third"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="360dp"
+                android:src="@drawable/img3" />
+
+
+            <LinearLayout
+                android:id="@+id/main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="300dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/card_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="2dp"
+                    android:textColorHint="@color/hint">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/name"
+                        android:inputType="textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/card_course"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="2dp"
+                    android:textColorHint="@color/hint">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/course"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/course"
+                        android:inputType="textCapWords"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/card_phone"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="2dp"
+                    android:textColorHint="@color/hint">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/phone_number"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:maxLength="10"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/card_check"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:text="Are you Using Same Number On Whatsapp?"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="25sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:text="Yes"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="25sp" />
+
+                        <RadioButton
+                            android:id="@+id/no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="No"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="25sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/card_whatsapp"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="2dp"
+                    android:textColorHint="@color/hint">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/whtsapp_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/whatsapp_number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/card_email"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="2dp"
+                    android:textColorHint="@color/hint">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="25sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/main_back_image"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    />
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/click"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/main_back_image"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

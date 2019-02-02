@@ -53,64 +53,28 @@
         <!--</LinearLayout>-->
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/first"
-            android:src="@drawable/fb1"
+            android:src="@drawable/img1"
             android:layout_marginStart="40dp"
             android:layout_marginTop="120dp"
             android:layout_width="150dp"
             android:layout_height="150dp" />
 
-        <TextView
-            android:id="@+id/tfirst"
-            android:visibility="gone"
-            android:layout_marginStart="40dp"
-            android:layout_below="@id/first"
-            android:layout_marginTop="10dp"
-            android:text="Content 1"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <ImageView
             android:id="@+id/sec"
-            android:src="@drawable/fb2"
-            android:visibility="gone"
+            android:src="@drawable/img2"
             android:layout_marginStart="40dp"
             android:layout_marginTop="320dp"
             android:layout_width="150dp"
             android:layout_height="150dp" />
 
-        <TextView
-            android:id="@+id/tsec"
-            android:visibility="gone"
-            android:layout_marginStart="40dp"
-            android:layout_below="@id/sec"
-            android:layout_marginTop="10dp"
-            android:text="Content 2"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <ImageView
             android:id="@+id/third"
-            android:visibility="gone"
-            android:src="@drawable/fb3"
+            android:src="@drawable/img3"
             android:layout_marginStart="40dp"
             android:layout_marginTop="520dp"
             android:layout_width="150dp"
             android:layout_height="150dp" />
-
-        <TextView
-            android:id="@+id/tthird"
-            android:visibility="gone"
-            android:layout_marginStart="40dp"
-            android:layout_below="@id/third"
-            android:layout_marginTop="10dp"
-            android:text="Content 3"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/main_layout"

@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.PatternMatcher;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -49,13 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean radio = true;
     int card_no = 0;
 
-    EditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
-    TextView tv, ty_message, c1, c2, c3;
+    TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
+    TextView tv, ty_message;
     Button submit, pin_btn, next;
     RadioGroup rgroup;
     EditText pin;
 
-    CardView card_name, card_course, card_phone, card_check, card_whatsapp, card_email;
+    TextInputLayout card_name, card_course, card_phone, card_whatsapp, card_email;
+    LinearLayout card_check;
     ImageView f1, f2, f3;
 
     LayoutInflater li;
@@ -71,37 +75,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.dummy_tab);
 
         //card id
-        card_name = (CardView) findViewById(R.id.card_name);
-        card_course = (CardView) findViewById(R.id.card_course);
-        card_phone = (CardView) findViewById(R.id.card_phone);
-        card_check = (CardView) findViewById(R.id.card_check);
-        card_whatsapp = (CardView) findViewById(R.id.card_whatsapp);
-        card_email = (CardView) findViewById(R.id.card_email);
+        card_name = (TextInputLayout) findViewById(R.id.card_name);
+        card_course = (TextInputLayout) findViewById(R.id.card_course);
+        card_phone = (TextInputLayout) findViewById(R.id.card_phone);
+        card_check = (LinearLayout) findViewById(R.id.card_check);
+        card_whatsapp = (TextInputLayout) findViewById(R.id.card_whatsapp);
+        card_email = (TextInputLayout) findViewById(R.id.card_email);
 
         //imageview id
         f1 = (ImageView) findViewById(R.id.first);
         f2 = (ImageView) findViewById(R.id.sec);
         f3 = (ImageView) findViewById(R.id.third);
 
-        //textview id
-        c1 = (TextView) findViewById(R.id.tfirst);
-        c2 = (TextView) findViewById(R.id.tsec);
-        c3 = (TextView) findViewById(R.id.tthird);
+
         tv = (TextView) findViewById(R.id.ofeuse);
 
         //radiobutton id
         r1 = (RadioButton) findViewById(R.id.yes);
         r2 = (RadioButton) findViewById(R.id.no);
 
-        //EditText id
-        name_edit = (EditText) findViewById(R.id.name);
-        phone_edit = (EditText) findViewById(R.id.phone);
-        whPhone_edit = (EditText) findViewById(R.id.whtsapp_number);
-        course_edit = (EditText) findViewById(R.id.course);
-        email_edit = (EditText) findViewById(R.id.email);
+        //TextInputEditText id
+        name_edit = (TextInputEditText) findViewById(R.id.name);
+        phone_edit = (TextInputEditText) findViewById(R.id.phone);
+        whPhone_edit = (TextInputEditText) findViewById(R.id.whtsapp_number);
+        course_edit = (TextInputEditText) findViewById(R.id.course);
+        email_edit = (TextInputEditText) findViewById(R.id.email);
 
         //RadioGroup id
         rgroup = (RadioGroup) findViewById(R.id.rGroup);
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         next = (Button) findViewById(R.id.next);
 
         next.setEnabled(false);
-        next.setBackground(getDrawable(R.drawable.button_design_disable));
+//        next.setBackground(getDrawable(R.drawable.button_design_disable));
 
         //ClickListener
         tv.setOnClickListener(this);
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int select = group.getCheckedRadioButtonId();
                     if (select > -1) {
                         next.setEnabled(true);
-                        next.setBackground(getDrawable(R.drawable.button_design_enable));
+//                        next.setBackground(getDrawable(R.drawable.button_design_enable));
                     }
                 }
             }
@@ -181,8 +182,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
                     email_edit.setError("Please Enter Valid Email Id");
                     email_edit.requestFocus();
+                    return;
                 }
-                return;
+
             }
 
             Long timing = System.currentTimeMillis();
@@ -275,10 +277,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
                     next.setEnabled(true);
-                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_enable));
                 } else {
                     next.setEnabled(false);
-                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_disable));
                 }
             }
 
@@ -299,10 +301,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 whPhone_edit.setText(s.toString());
                 if (count > 0) {
                     next.setEnabled(true);
-                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_enable));
                 } else {
                     next.setEnabled(false);
-                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_disable));
                 }
             }
 
@@ -323,10 +325,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (whPhone_edit.isEnabled()) {
                     if (count > 0) {
                         next.setEnabled(true);
-                        next.setBackground(getDrawable(R.drawable.button_design_enable));
+//                        next.setBackground(getDrawable(R.drawable.button_design_enable));
                     } else {
                         next.setEnabled(false);
-                        next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                        next.setBackground(getDrawable(R.drawable.button_design_disable));
                     }
                 }
             }
@@ -347,10 +349,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
                     next.setEnabled(true);
-                    next.setBackground(getDrawable(R.drawable.button_design_enable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_enable));
                 } else {
                     next.setEnabled(false);
-                    next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                    next.setBackground(getDrawable(R.drawable.button_design_disable));
                 }
             }
 
@@ -362,6 +364,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         whPhone_edit.setEnabled(false);
     }
+
+    int delay =2000;
 
     private void showCard() {
         if (card_check.getVisibility() == View.VISIBLE) {
@@ -418,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
-                next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                next.setBackground(getDrawable(R.drawable.button_design_disable));
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -426,13 +430,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         course_edit.requestFocus();
                         card_course.startAnimation(setZoomAnimation());
                     }
-                }, 3400);
+                }, delay);
                 break;
             case 1:
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
-                next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                next.setBackground(getDrawable(R.drawable.button_design_disable));
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -440,26 +444,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         phone_edit.requestFocus();
                         card_phone.startAnimation(setZoomAnimation());
                     }
-                },3400);
+                },delay);
                 break;
             case 2:
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
-                next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                next.setBackground(getDrawable(R.drawable.button_design_disable));
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         card_check.setVisibility(View.VISIBLE);
                         card_check.startAnimation(setZoomAnimation());
                     }
-                }, 3400);
+                }, delay);
                 break;
             case 3:
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
-                next.setBackground(getDrawable(R.drawable.button_design_disable));
+//                next.setBackground(getDrawable(R.drawable.button_design_disable));
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -467,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         card_whatsapp.setVisibility(View.VISIBLE);
                         card_whatsapp.startAnimation(setZoomAnimation());
                     }
-                }, 3400);
+                }, delay);
                 break;
             case 4:
                 card_no++;
@@ -484,7 +488,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         submit.startAnimation(setZoomAnimation());
                         card_email.startAnimation(setZoomAnimation());
                     }
-                }, 3400);
+                }, delay);
                 break;
         }
     }
@@ -500,14 +504,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Animation img_2 = AnimationUtils.loadAnimation(this, R.anim.img_2_start);
         Animation img_1 = AnimationUtils.loadAnimation(this, R.anim.img_1_start);
 
-        Animation anim_1 = AnimationUtils.loadAnimation(this, R.anim.text1);
-        Animation anim_2 = AnimationUtils.loadAnimation(this, R.anim.text2);
-        Animation anim_3 = AnimationUtils.loadAnimation(this, R.anim.text3);
-
-        c1.setVisibility(View.VISIBLE);
-        c2.setVisibility(View.VISIBLE);
-        c3.setVisibility(View.VISIBLE);
-
         f1.setVisibility(View.VISIBLE);
         f2.setVisibility(View.VISIBLE);
         f3.setVisibility(View.VISIBLE);
@@ -516,9 +512,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         f2.startAnimation(img_2);
         f3.startAnimation(img_1);
 
-        c1.startAnimation(anim_3);
-        c2.startAnimation(anim_2);
-        c3.startAnimation(anim_1);
     }
 
     private void showThankYouMessage() {

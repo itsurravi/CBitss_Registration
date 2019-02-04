@@ -54,7 +54,7 @@
 
         <ImageView
             android:id="@+id/first"
-            android:src="@drawable/img1"
+            android:src="@drawable/transe"
             android:visibility="gone"
             android:layout_marginStart="40dp"
             android:layout_marginTop="80dp"
@@ -74,7 +74,7 @@
 
         <ImageView
             android:id="@+id/sec"
-            android:src="@drawable/img2"
+            android:src="@drawable/qc"
             android:visibility="gone"
             android:layout_marginStart="40dp"
             android:layout_marginTop="280dp"
@@ -94,7 +94,7 @@
 
         <ImageView
             android:id="@+id/third"
-            android:src="@drawable/img3"
+            android:src="@drawable/gc"
             android:visibility="gone"
             android:layout_marginStart="40dp"
             android:layout_marginTop="480dp"

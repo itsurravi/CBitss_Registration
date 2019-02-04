@@ -52,6 +52,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean radio = true;
     int card_no = 0;
 
+    int images[] = {
+            R.drawable.placement,
+            R.drawable.so,
+            R.drawable.sotm,
+            R.drawable.t3,
+            R.drawable.we,
+            R.drawable.wmi,
+            R.drawable.youtube,
+            R.drawable.qc,
+            R.drawable.transe,
+            R.drawable.gc
+    };
+
     TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
     TextView tv, ty_message;
     Button submit, pin_btn, next;
@@ -433,6 +446,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 1:
+                f1.setImageResource(images[0]);
+                f2.setImageResource(images[1]);
+                f3.setImageResource(images[2]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -447,6 +463,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 },delay);
                 break;
             case 2:
+
+                f1.setImageResource(images[3]);
+                f2.setImageResource(images[4]);
+                f3.setImageResource(images[5]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -460,6 +480,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 3:
+                f1.setImageResource(images[6]);
+                f2.setImageResource(images[7]);
+                f3.setImageResource(images[8]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -474,6 +497,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 4:
+                f1.setImageResource(images[9]);
+                f2.setImageResource(images[1]);
+                f3.setImageResource(images[2]);
                 card_no++;
                 image_animation_start();
                 Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.exit_to_right);

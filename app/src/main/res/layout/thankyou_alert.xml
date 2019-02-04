@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="hello"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold|italic" />
 
     </LinearLayout>

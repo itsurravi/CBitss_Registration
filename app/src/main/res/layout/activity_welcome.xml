@@ -21,6 +21,7 @@
 
 
     <ImageView
+        android:id="@+id/cb_logo"
         android:layout_below="@+id/wel"
         android:src="@drawable/cbitss"
         android:layout_marginTop="150dp"
@@ -31,7 +32,6 @@
     <com.ebanx.swipebtn.SwipeButton
         android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
         android:layout_height="80dp"
         android:layout_marginStart="140dp"
         android:layout_marginEnd="140dp"

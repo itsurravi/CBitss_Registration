@@ -23,92 +23,114 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
+        android:weightSum="2"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
+                android:id="@+id/learn_image"
+                android:padding="30dp"
+                android:src="@drawable/process"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/ab"
-                android:layout_marginStart="250dp"
-                android:text="Enquiry Form"
-                android:textColor="@color/colorPrimary"
-                android:textSize="45dp" />
+                android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/ofeuse"
-                android:visibility="gone"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/ab"
-                android:text="For Office Use"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
-                />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/first"
+                    android:visibility="gone"
+                    android:layout_margin="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/transe" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/sec"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/qc" />
 
+                <ImageView
+                    android:id="@+id/third"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/gc" />
 
-            <ImageView
-                android:id="@+id/first"
-                android:visibility="gone"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="40dp"
-                android:src="@drawable/transe" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/sec"
-                android:visibility="gone"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="180dp"
-                android:src="@drawable/qc" />
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/third"
-                android:visibility="gone"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="360dp"
-                android:src="@drawable/gc" />
+        <View
+            android:layout_width="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="300dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"/>
 
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/enquiry_stages"
+                    android:padding="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/one" />
+
+                <TextView
+                    android:id="@+id/ofeuse"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/ab"
+                    android:text="For Office Use"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"
+                    />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/main_layout"
-                android:layout_width="match_parent"
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="300dp"
-                android:layout_marginEnd="40dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/card_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:padding="2dp"
                     android:textColorHint="@color/hint">
 
@@ -127,9 +149,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/card_course"
                     android:visibility="gone"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:padding="2dp"
                     android:textColorHint="@color/hint">
 
@@ -148,9 +169,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/card_phone"
                     android:visibility="gone"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:padding="2dp"
                     android:textColorHint="@color/hint">
 
@@ -171,7 +191,7 @@
                     android:id="@+id/card_check"
                     android:visibility="gone"
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:gravity="center"
                     android:layout_height="wrap_content">
 
@@ -218,9 +238,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/card_whatsapp"
                     android:visibility="gone"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:padding="2dp"
                     android:textColorHint="@color/hint">
 
@@ -240,9 +259,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/card_email"
                     android:visibility="gone"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:padding="2dp"
                     android:textColorHint="@color/hint">
 
@@ -281,11 +299,9 @@
                     android:textSize="25sp"
                     />
 
-
             </LinearLayout>
 
-        </RelativeLayout>
-
+        </LinearLayout>
 
     </LinearLayout>
 

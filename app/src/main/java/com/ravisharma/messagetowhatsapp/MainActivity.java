@@ -6,20 +6,16 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
-import android.os.PatternMatcher;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.Explode;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -41,7 +37,6 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import static com.ravisharma.messagetowhatsapp.Main2Activity.getDate;
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button submit, pin_btn, next;
     RadioGroup rgroup;
     EditText pin;
-
+    ImageView enqiury;
     TextInputLayout card_name, card_course, card_phone, card_whatsapp, card_email;
     LinearLayout card_check;
     ImageView f1, f2, f3;
@@ -102,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         f1 = (ImageView) findViewById(R.id.first);
         f2 = (ImageView) findViewById(R.id.sec);
         f3 = (ImageView) findViewById(R.id.third);
+        enqiury = (ImageView)findViewById(R.id.enquiry_stages);
 
 
         tv = (TextView) findViewById(R.id.ofeuse);
@@ -161,6 +157,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+//        image_animation_start();
+        ImageView learn = (ImageView)findViewById(R.id.learn_image);
+        Animation one = AnimationUtils.loadAnimation(this, R.anim.anim_one);
+        learn.startAnimation(one);
+
+        Animation two = AnimationUtils.loadAnimation(this, R.anim.anim_two);
+        enqiury.startAnimation(two);
     }
 
     @Override
@@ -265,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     phone_edit.setText("");
                     whPhone_edit.setText("");
                     course_edit.setText("");
+                    email_edit.setText("");
                 }
             } catch (Exception e) {
                 Toast.makeText(this, "Enter Valid Pin", Toast.LENGTH_SHORT).show();
@@ -433,6 +438,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (card_no) {
             case 0:
                 card_no++;
+
                 image_animation_start();
                 next.setEnabled(false);
 //                next.setBackground(getDrawable(R.drawable.button_design_disable));
@@ -442,6 +448,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         card_course.setVisibility(View.VISIBLE);
                         course_edit.requestFocus();
                         card_course.startAnimation(setZoomAnimation());
+                        enqiury.setImageResource(R.drawable.two);
                     }
                 }, delay);
                 break;
@@ -459,6 +466,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         card_phone.setVisibility(View.VISIBLE);
                         phone_edit.requestFocus();
                         card_phone.startAnimation(setZoomAnimation());
+                        enqiury.setImageResource(R.drawable.three);
                     }
                 },delay);
                 break;
@@ -476,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void run() {
                         card_check.setVisibility(View.VISIBLE);
                         card_check.startAnimation(setZoomAnimation());
+                        enqiury.setImageResource(R.drawable.four);
                     }
                 }, delay);
                 break;
@@ -493,6 +502,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         whPhone_edit.requestFocus();
                         card_whatsapp.setVisibility(View.VISIBLE);
                         card_whatsapp.startAnimation(setZoomAnimation());
+                        enqiury.setImageResource(R.drawable.five);
                     }
                 }, delay);
                 break;
@@ -513,6 +523,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         card_email.setVisibility(View.VISIBLE);
                         submit.startAnimation(setZoomAnimation());
                         card_email.startAnimation(setZoomAnimation());
+                        enqiury.setImageResource(R.drawable.six);
                     }
                 }, delay);
                 break;

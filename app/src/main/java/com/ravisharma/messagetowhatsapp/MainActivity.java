@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,31 +49,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int card_no = 0;
 
     int images[] = {
-            R.drawable.placement,
             R.drawable.so,
+            R.drawable.qc,
             R.drawable.sotm,
+            R.drawable.transe,
+            R.drawable.wmi,
+            R.drawable.placement,
+            R.drawable.redhat,
             R.drawable.t3,
             R.drawable.we,
-            R.drawable.wmi,
             R.drawable.youtube,
-            R.drawable.qc,
-            R.drawable.transe,
             R.drawable.gc
     };
 
     TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
-    TextView tv, ty_message;
-    Button submit, pin_btn, next;
+    Button submit, next;
     RadioGroup rgroup;
-    EditText pin;
+
     ImageView enqiury;
     TextInputLayout card_name, card_course, card_phone, card_whatsapp, card_email;
     LinearLayout card_check;
-    ImageView f1, f2, f3;
+    ImageView f1, f2/*, f3*/;
 
-    LayoutInflater li;
-    View layout;
-    AlertDialog a;
+    ProgressDialog d;
 
     String date, time, name, num1, num2, course, email;
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dummy_tab);
-
+        d = new ProgressDialog(this);
         //card id
         card_name = (TextInputLayout) findViewById(R.id.card_name);
         card_course = (TextInputLayout) findViewById(R.id.card_course);
@@ -96,11 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //imageview id
         f1 = (ImageView) findViewById(R.id.first);
         f2 = (ImageView) findViewById(R.id.sec);
-        f3 = (ImageView) findViewById(R.id.third);
-        enqiury = (ImageView)findViewById(R.id.enquiry_stages);
-
-
-        tv = (TextView) findViewById(R.id.ofeuse);
+//        f3 = (ImageView) findViewById(R.id.third);
+        enqiury = (ImageView) findViewById(R.id.enquiry_stages);
 
         //radiobutton id
         r1 = (RadioButton) findViewById(R.id.yes);
@@ -121,17 +117,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         next = (Button) findViewById(R.id.next);
 
         next.setEnabled(false);
-//        next.setBackground(getDrawable(R.drawable.button_design_disable));
 
         //ClickListener
-        tv.setOnClickListener(this);
         submit.setOnClickListener(this);
         next.setOnClickListener(this);
-
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.enter_zoom1);
-        card_name.startAnimation(anim);
-        next.startAnimation(anim);
-
         db = new DB(this);
 
         SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
@@ -152,19 +141,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int select = group.getCheckedRadioButtonId();
                     if (select > -1) {
                         next.setEnabled(true);
-//                        next.setBackground(getDrawable(R.drawable.button_design_enable));
                     }
                 }
             }
         });
 
-//        image_animation_start();
-        ImageView learn = (ImageView)findViewById(R.id.learn_image);
+
+        f1.setImageResource(images[0]);
+        f2.setImageResource(images[1]);
+
+        ImageView learn = (ImageView) findViewById(R.id.learn_image);
         Animation one = AnimationUtils.loadAnimation(this, R.anim.anim_one);
         learn.startAnimation(one);
 
         Animation two = AnimationUtils.loadAnimation(this, R.anim.anim_two);
         enqiury.startAnimation(two);
+
+        Animation three = AnimationUtils.loadAnimation(this, R.anim.anim_three);
+        f1.startAnimation(three);
+
+        Animation four = AnimationUtils.loadAnimation(this, R.anim.anim_four);
+        f2.startAnimation(four);
+
+//        Animation five = AnimationUtils.loadAnimation(this, R.anim.anim_five);
+//        f3.startAnimation(five);
+
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.enter_zoom1);
+        card_name.startAnimation(anim);
+        next.startAnimation(anim);
     }
 
     @Override
@@ -181,22 +185,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Please Fill All Values", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (num1.length()<10)
-            {
+            if (num1.length() < 10) {
                 phone_edit.setError("Please Enter Valid Number");
                 phone_edit.requestFocus();
                 return;
             }
-            if (num2.length()<10)
-            {
+            if (num2.length() < 10) {
                 whPhone_edit.setError("Please Enter Valid Number");
                 whPhone_edit.requestFocus();
                 return;
             }
 
-            if(!email.isEmpty())
-            {
-                if(!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
+            if (!email.isEmpty()) {
+                if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
                     email_edit.setError("Please Enter Valid Email Id");
                     email_edit.requestFocus();
                     return;
@@ -209,74 +210,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             date = getDate(timing, "dd/MM/yyyy");
             time = getDate(timing, "hh:mm:ss");
 
-            String message = "Hello " + name.toUpperCase() + ", Welcome to CBitss You are ensured for the course of " + course;
+            d.setMessage("Please Wait...");
+            d.setCancelable(false);
+            d.show();
+//9988741983
 
-            String url = "http://203.129.225.69/API/WebSMS/Http/v1.0a/index.php?username=cbitss&password=123456&sender=CBitss&to=91" + num1 + "&message=" + message + "&reqid=1&format={json|text}&route_id=7";
-
-            StringRequest sr = new StringRequest(url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-                    showThankYouMessage();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MainActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            RequestQueue r = Volley.newRequestQueue(this);
-            r.add(sr);
-
-        }
-        if (v == tv) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setTitle("Enter Pin for Office Use Only:-");
-            li = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-            layout = li.inflate(R.layout.alert, null);
-
-            builder.setView(layout);
-
-            pin = (EditText) layout.findViewById(R.id.pin);
-            pin_btn = (Button) layout.findViewById(R.id.button);
-            pin_btn.setOnClickListener(this);
-
-
-            a = builder.create();
-            a.setCancelable(false);
-            a.show();
-
-        }
-        if (v == pin_btn) {
-            String pincheck = pin.getText().toString().trim();
-            try {
-                Cursor c = db.getPass(pincheck);
-//                Toast.makeText(this, "" + c.getCount(), Toast.LENGTH_SHORT).show();
-                if (c.getCount() > 0) {
-                    if (name.isEmpty() || num1.isEmpty() || course.isEmpty()) {
-
-                    }
-                    Intent i = new Intent(MainActivity.this, Main2Activity.class);
-                    i.putExtra("pin", pincheck);
-                    i.putExtra("name", name);
-                    i.putExtra("num1", num1);
-                    i.putExtra("num2", num2);
-                    i.putExtra("course", course);
-                    startActivity(i);
-                    name_edit.setText("");
-                    phone_edit.setText("");
-                    whPhone_edit.setText("");
-                    course_edit.setText("");
-                    email_edit.setText("");
-                }
-            } catch (Exception e) {
-                Toast.makeText(this, "Enter Valid Pin", Toast.LENGTH_SHORT).show();
-            }
-            if (a.isShowing()) {
-                a.dismiss();
-            }
+            insertIntoSheet();
         }
 
         if (v == next) {
@@ -383,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         whPhone_edit.setEnabled(false);
     }
 
-    int delay =2000;
+    int delay = 1600;
 
     private void showCard() {
         if (card_check.getVisibility() == View.VISIBLE) {
@@ -414,21 +353,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        if(card_no==2)
-        {
+        if (card_no == 2) {
             String number = phone_edit.getText().toString().trim();
-            if(number.length()<10)
-            {
+            if (number.length() < 10) {
                 phone_edit.setError("Please Enter Valid Number");
                 phone_edit.requestFocus();
                 return;
             }
         }
-        if(card_no==4)
-        {
+        if (card_no == 4) {
             String number = whPhone_edit.getText().toString().trim();
-            if(number.length()<10)
-            {
+            if (number.length() < 10) {
                 whPhone_edit.setError("Please Enter Valid Number");
                 whPhone_edit.requestFocus();
                 return;
@@ -438,7 +373,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (card_no) {
             case 0:
                 card_no++;
-
+                f1.setImageResource(images[2]);
+                f2.setImageResource(images[3]);
                 image_animation_start();
                 next.setEnabled(false);
 //                next.setBackground(getDrawable(R.drawable.button_design_disable));
@@ -453,9 +389,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 1:
-                f1.setImageResource(images[0]);
-                f2.setImageResource(images[1]);
-                f3.setImageResource(images[2]);
+                f1.setImageResource(images[4]);
+                f2.setImageResource(images[5]);
+//                f3.setImageResource(images[2]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -468,13 +404,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         card_phone.startAnimation(setZoomAnimation());
                         enqiury.setImageResource(R.drawable.three);
                     }
-                },delay);
+                }, delay);
                 break;
             case 2:
 
-                f1.setImageResource(images[3]);
-                f2.setImageResource(images[4]);
-                f3.setImageResource(images[5]);
+                f1.setImageResource(images[6]);
+                f2.setImageResource(images[7]);
+//                f3.setImageResource(images[5]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -489,9 +425,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 3:
-                f1.setImageResource(images[6]);
-                f2.setImageResource(images[7]);
-                f3.setImageResource(images[8]);
+                f1.setImageResource(images[10]);
+                f2.setImageResource(images[1]);
+//                f3.setImageResource(images[8]);
                 card_no++;
                 image_animation_start();
                 next.setEnabled(false);
@@ -507,9 +443,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, delay);
                 break;
             case 4:
-                f1.setImageResource(images[9]);
-                f2.setImageResource(images[1]);
-                f3.setImageResource(images[2]);
+                f1.setImageResource(images[8]);
+                f2.setImageResource(images[9]);
+//                f3.setImageResource(images[2]);
                 card_no++;
                 image_animation_start();
                 Animation anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.exit_to_right);
@@ -543,65 +479,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         f1.setVisibility(View.VISIBLE);
         f2.setVisibility(View.VISIBLE);
-        f3.setVisibility(View.VISIBLE);
+//        f3.setVisibility(View.VISIBLE);
 
-        f1.startAnimation(img_3);
-        f2.startAnimation(img_2);
-        f3.startAnimation(img_1);
+        f1.startAnimation(img_2);
+        f2.startAnimation(img_1);
+//        f3.startAnimation(img_1);
 
-    }
-
-    private void showThankYouMessage() {
-        String text = name + "\n\n For Showing Your Interest In " + course;
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        LayoutInflater l = LayoutInflater.from(this);
-        View v = l.inflate(R.layout.thankyou_alert, null);
-
-        ty_message = (TextView) v.findViewById(R.id.msg);
-        ty_message.setText(text);
-        b.setView(v);
-
-        final AlertDialog d = b.create();
-        d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        d.setCancelable(false);
-        d.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (d.isShowing()) {
-                    d.dismiss();
-                    insertIntoSheet();
-                }
-            }
-        }, 5000);
     }
 
     private void insertIntoSheet() {
         if (email.isEmpty()) {
             email = "Not Available";
         }
-        final ProgressDialog d = new ProgressDialog(this);
-        d.setMessage("Please Wait...");
-        d.setCancelable(false);
-        d.show();
 
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                         d.dismiss();
-                        tv.setVisibility(View.VISIBLE);
+                        Intent i = new Intent(MainActivity.this, ThankYouActivity.class);
+                        i.putExtra("name", name);
+                        i.putExtra("num1", num1);
+                        i.putExtra("num2", num2);
+                        i.putExtra("course", course);
+                        i.putExtra("email", email);
+                        startActivity(i);
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         d.dismiss();
-                        Toast.makeText(MainActivity.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                })
-        {
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> m = new HashMap<>();

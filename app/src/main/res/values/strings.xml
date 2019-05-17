@@ -2,11 +2,13 @@
     <string name="app_name">CBitss Enquiry Form</string>
 
     <!--activity_main-->
-    <string name="phone_number">Enter Phone Number</string>
-    <string name="whatsapp_number">Enter Whatsapp Number</string>
-    <string name="course">Enter Course</string>
-    <string name="name"><font size="30">Enter Name</font> </string>
+    <string name="phone_number">Enter Phone Number ( Without Country Code )</string>
+    <string name="whatsapp_number">Enter Whatsapp Number ( With Country Code )</string>
+    <string name="course">Enter Course ( You are interested in )</string>
+    <string name="name"><font size="30">Enter Full Name</font> </string>
     <string name="email">Enter Email</string>
+    <string name="win">Scratch and win</string>
+    <string name="scratch">paytm cash back upto 2000.\nIf you register today for your desired course.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

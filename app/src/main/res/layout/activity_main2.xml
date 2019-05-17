@@ -42,6 +42,19 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:button="@drawable/custom_checkbox"
+        android:fontFamily="@font/ab"
+        android:textAlignment="center"
+        android:text=" Message Sent to Client On WhatsApp\n (UnTick if NOT) "
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:checked="true" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,11 +66,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="Send To Group:- "
+            android:fontFamily="@font/ab"
 
+            android:text="Send To Group:- "
             android:textColor="@color/white"
-            android:textSize="30dp"
-            android:fontFamily="@font/ab"/>
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/group"
@@ -70,5 +83,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="startAgain"
+        android:padding="10dp"
+        android:text="Start Again"
+        android:textColor="#fff" />
 
 </LinearLayout>

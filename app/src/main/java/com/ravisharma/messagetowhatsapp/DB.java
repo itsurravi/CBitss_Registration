@@ -14,14 +14,15 @@ public class DB extends SQLiteOpenHelper {
     public static String USER = "USER";
     public static String PASS = "PASS";
 
-    String names[] = {"abc",
-            "xyz",
-            "abcd",
-            "abcwe"};
-    String pas[] = {"123456",
-            "112233",
-            "987654",
-            "000000"};
+    private String names[] = {"Shikha",
+            "Nancy",
+            "Gurroop",
+    };
+
+    private String pas[] = {"shikha34",
+            "nancy34",
+            "roop34",
+            };
 
     public static int DB_VERSION = 1;
 
@@ -64,7 +65,7 @@ public class DB extends SQLiteOpenHelper {
     public Cursor getPass(String password)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM "+TB_NAME+" WHERE "+PASS+"="+password;
+        String sql = "SELECT * FROM "+TB_NAME+" WHERE "+PASS+"='"+password+"'";
         Cursor c = db.rawQuery(sql, null);
         return c;
     }

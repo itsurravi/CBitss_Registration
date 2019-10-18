@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
@@ -43,6 +44,7 @@ import static com.ravisharma.messagetowhatsapp.Main2Activity.getDate;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String urlPaytm = "http://fossfoundation.com/EnquiryFormPaytm/GratificationPhp/gratificationSamle.php";
     private static String url = "https://script.google.com/macros/s/AKfycbzE15zANuanQFpd2W1MXxcOYxq9k6gID8UJH14cdUCsxExVcG4H/exec";
     private static String id = "1dSo2kv4_V6cleUhvlAR17nRPUO9Xzi1Pm7nSSynSF5E";
     boolean radio = true;
@@ -62,14 +64,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.gc
     };
 
+    private String uriUpi = "";
+
     TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
+    EditText prefix_num;
     Button submit, next;
     RadioGroup rgroup;
 
     ImageView enqiury;
-    TextInputLayout card_name, card_course, card_phone, card_whatsapp, card_email;
-    LinearLayout card_check;
-    ImageView f1, f2/*, f3*/;
+    TextInputLayout card_name, card_course, card_phone, card_email;
+    LinearLayout card_check, card_whatsapp;
+    ImageView f1, f2;
 
     ProgressDialog d;
 
@@ -89,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         card_course = (TextInputLayout) findViewById(R.id.card_course);
         card_phone = (TextInputLayout) findViewById(R.id.card_phone);
         card_check = (LinearLayout) findViewById(R.id.card_check);
-        card_whatsapp = (TextInputLayout) findViewById(R.id.card_whatsapp);
+        card_whatsapp = (LinearLayout) findViewById(R.id.card_whatsapp);
         card_email = (TextInputLayout) findViewById(R.id.card_email);
 
         //imageview id
@@ -97,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         f2 = (ImageView) findViewById(R.id.sec);
 //        f3 = (ImageView) findViewById(R.id.third);
         enqiury = (ImageView) findViewById(R.id.enquiry_stages);
+
 
         //radiobutton id
         r1 = (RadioButton) findViewById(R.id.yes);
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         whPhone_edit = (TextInputEditText) findViewById(R.id.whtsapp_number);
         course_edit = (TextInputEditText) findViewById(R.id.course);
         email_edit = (TextInputEditText) findViewById(R.id.email);
+        prefix_num = (EditText) findViewById(R.id.prefix_num);
 
         //RadioGroup id
         rgroup = (RadioGroup) findViewById(R.id.rGroup);
@@ -181,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             course = course_edit.getText().toString().trim();
             email = email_edit.getText().toString().trim();
 
+            String prefix = prefix_num.getText().toString().trim();
+
             if (name.isEmpty() || num1.isEmpty() || num2.isEmpty() || course.isEmpty()) {
                 Toast.makeText(this, "Please Fill All Values", Toast.LENGTH_SHORT).show();
                 return;
@@ -196,6 +205,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
+            if (prefix.isEmpty()) {
+                prefix_num.setError("Please Enter Country Code here");
+                prefix_num.requestFocus();
+                return;
+            }
+
             if (!email.isEmpty()) {
                 if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
                     email_edit.setError("Please Enter Valid Email Id");
@@ -205,22 +220,108 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
+            num2 = prefix + num2;
+
             Long timing = System.currentTimeMillis();
 
             date = getDate(timing, "dd/MM/yyyy");
             time = getDate(timing, "hh:mm:ss");
 
-            d.setMessage("Please Wait...");
-            d.setCancelable(false);
-            d.show();
-//9988741983
-
-            insertIntoSheet();
+            showAlertForCashBack();
         }
 
         if (v == next) {
             showCard();
         }
+    }
+
+    private void showAlertForCashBack() {
+
+        View v = LayoutInflater.from(this).inflate(R.layout.alert_cashback, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(v);
+
+        final AlertDialog ad = builder.create();
+        ad.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        ad.show();
+
+        final EditText ed_paytm = v.findViewById(R.id.paytm_number);
+        final EditText ed_upiId = v.findViewById(R.id.upi_number);
+        TextView txt_proceed = v.findViewById(R.id.txt_proceed);
+        Button submit = v.findViewById(R.id.btn_submit_alert);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String paytm = ed_paytm.getText().toString().trim();
+                String upi = ed_upiId.getText().toString().trim();
+
+                if (paytm.isEmpty() && upi.isEmpty()) {
+                    ed_paytm.setError("Enter Your Paytm Number Here");
+                    ed_upiId.setError("Enter Your UPI id Here");
+                    ed_paytm.requestFocus();
+                    return;
+                }
+
+                if (paytm.length() == 10) {
+                    sendPaytmCashBack(paytm);
+                    ad.dismiss();
+                    performTask();
+                } else if (upi.contains("@")) {
+                    generateUpiUrl(upi);
+                    ad.dismiss();
+                    performTask();
+                }
+            }
+        });
+
+        txt_proceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ad.dismiss();
+                performTask();
+            }
+        });
+
+    }
+
+    private void sendPaytmCashBack(final String paytmNumber) {
+        StringRequest sr = new StringRequest(Request.Method.POST, urlPaytm,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("Response_Paytm_Url", response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Response_Paytm_error", String.valueOf(error));
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> m = new HashMap<>();
+                m.put("paytm", paytmNumber);
+
+                return m;
+            }
+        };
+
+        RequestQueue r = Volley.newRequestQueue(this);
+        r.add(sr);
+    }
+
+    private void generateUpiUrl(String upiId) {
+        uriUpi = "http://cbitss.pay?pa=" + upiId;
+    }
+
+    private void performTask() {
+        d.setMessage("Please Wait...");
+        d.setCancelable(false);
+        d.show();
+        insertIntoSheet();
     }
 
     private void textchangeListener() {
@@ -484,7 +585,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         f1.startAnimation(img_2);
         f2.startAnimation(img_1);
 //        f3.startAnimation(img_1);
-
     }
 
     private void insertIntoSheet() {
@@ -503,6 +603,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         i.putExtra("num2", num2);
                         i.putExtra("course", course);
                         i.putExtra("email", email);
+                        i.putExtra("uri_upi", uriUpi);
                         startActivity(i);
 
                     }

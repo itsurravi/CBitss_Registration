@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class Main2Activity extends AppCompatActivity {
 
-    String name, number1, number2, course, pincheck, detail_by;
+    String name, number1, number2, course, pincheck, detail_by, uri_upi;
     DB db;
     CheckBox cb;
 
@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
         number1 = b.getString("num1");
         number2 = b.getString("num2");
         course = b.getString("course");
-
+        uri_upi = b.getString("uri_upi");
 
         Cursor c = db.getPass(pincheck);
         if (c.getCount() > 0) {
@@ -79,28 +79,28 @@ public class Main2Activity extends AppCompatActivity {
             Intent waIntent = new Intent(Intent.ACTION_SEND);
             waIntent.setType("text/plain");
 
-            String text="";
+            String text = "";
 
-            if(cb.isChecked()) {
+            if (cb.isChecked()) {
                 text = "Date: " + date +
                         "\nTime: " + time +
                         "\n\nName: " + name +
                         "\nPhone No.: " + number1 +
                         "\nWhatsapp No.: " + number2 +
                         "\nCourse: " + course +
-                        "\n\nBy:- " + detail_by;
+                        "\n\nBy:- " + detail_by +
+                        "\n\n\nUPI Pay Url:- " + uri_upi;
 
-            }
-            else
-            {
+            } else {
                 text = "Date: " + date +
                         "\nTime: " + time +
                         "\n\nName: " + name +
                         "\nPhone No.: " + number1 +
                         "\nWhatsapp No.: " + number2 +
-                        "\nCourse: " + course  +
+                        "\nCourse: " + course +
                         "\n\nNote:- This Number is not on WhatsApp." +
-                        "\n\nBy:- " + detail_by;
+                        "\n\nBy:- " + detail_by +
+                        "\n\n\nUPI Pay Url:- " + uri_upi;
             }
             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
             //Check if package exists or not. If not then code
@@ -131,28 +131,27 @@ public class Main2Activity extends AppCompatActivity {
     public void send_to_client(String phone) {
 
 
-            String message = "Dear *" + name + "*,\n\nThank you for showing your interest in our Professional *"
-                    + course + "* Course. \n\nWe Assure You to Deliver Quality Training.\n\n"
-                    + "Thank you. \n\n CBitss Technologies";
+        String message = "Dear *" + name + "*,\n\nThank you for showing your interest in our Professional *"
+                + course + "* Course. \n\nWe Assure You to Deliver Quality Training.\n\n"
+                + "Thank you. \n\n CBitss Technologies";
 
-            PackageManager packageManager = getPackageManager();
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            try {
-                String url="";
-                if(phone.equals(number1)) {
-                    url = "https://api.whatsapp.com/send?phone=+91" + phone + "&text=" + URLEncoder.encode(message, "UTF-8");
-                }
-                else {
-                    url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + URLEncoder.encode(message, "UTF-8");
-                }
-                i.setPackage("com.whatsapp");
-                i.setData(Uri.parse(url));
-                if (i.resolveActivity(packageManager) != null) {
-                    startActivity(i);
-                }
-            } catch (Exception e) {
-                Toast.makeText(this, "Whatsapp not Installed", Toast.LENGTH_SHORT).show();
+        PackageManager packageManager = getPackageManager();
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        try {
+            String url = "";
+            if (phone.equals(number1)) {
+                url = "https://api.whatsapp.com/send?phone=+91" + phone + "&text=" + URLEncoder.encode(message, "UTF-8");
+            } else {
+                url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + URLEncoder.encode(message, "UTF-8");
             }
+            i.setPackage("com.whatsapp");
+            i.setData(Uri.parse(url));
+            if (i.resolveActivity(packageManager) != null) {
+                startActivity(i);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Whatsapp not Installed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static String getDate(long milliSeconds, String dateFormat) {

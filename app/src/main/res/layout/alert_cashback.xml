@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/paytm" />
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/upi" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/paytm_number"
+            android:maxLength="10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:ems="13"
+            android:hint="Enter Your Paytm Number"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR" />
+
+        <EditText
+            android:id="@+id/upi_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:ems="13"
+            android:hint="Enter Your UPI Id"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/btn_submit_alert"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/main_back_image"
+            android:text="Submit"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/txt_proceed"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Here to Proceed if you have\n No Paytm or UPI Account"
+            android:textAlignment="center"
+            android:textColor="#12A3E7" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -3,7 +3,7 @@
 
     <!--activity_main-->
     <string name="phone_number">Enter Phone Number ( Without Country Code )</string>
-    <string name="whatsapp_number">Enter Whatsapp Number ( With Country Code )</string>
+    <string name="whatsapp_number">Enter Whatsapp Number</string>
     <string name="course">Enter Course ( You are interested in )</string>
     <string name="name"><font size="30">Enter Full Name</font> </string>
     <string name="email">Enter Email</string>

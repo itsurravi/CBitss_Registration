@@ -37,6 +37,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.gc
     };
 
-    private String uriUpi = "";
+    private String uriUpi = "", transactionId="";
 
     TextInputEditText name_edit, phone_edit, whPhone_edit, course_edit, email_edit;
     EditText prefix_num;
@@ -292,6 +294,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(String response) {
                         Log.d("Response_Paytm_Url", response);
+                        try
+                        {
+                            JSONObject jo = new JSONObject(response);
+                            JSONObject jo1 = jo.getJSONObject("response");
+                            transactionId = jo1.getString("walletSysTransactionId");
+//                            Log.d("JSONData", jo1.getString("walletSysTransactionId"));
+                        }
+                        catch(Exception e)
+                        {
+                            Log.d("Response_Paym_Url_Error", e.getMessage());
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -606,6 +619,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         i.putExtra("course", course);
                         i.putExtra("email", email);
                         i.putExtra("uri_upi", uriUpi);
+                        i.putExtra("trans_id", transactionId);
                         startActivity(i);
 
                     }

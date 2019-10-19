@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class Main2Activity extends AppCompatActivity {
 
-    String name, number1, number2, course, pincheck, detail_by, uri_upi;
+    String name, number1, number2, course, pincheck, detail_by, uri_upi, transactionId;
     DB db;
     CheckBox cb;
 
@@ -45,6 +45,7 @@ public class Main2Activity extends AppCompatActivity {
         number2 = b.getString("num2");
         course = b.getString("course");
         uri_upi = b.getString("uri_upi");
+        transactionId = b.getString("trans_id");
 
         Cursor c = db.getPass(pincheck);
         if (c.getCount() > 0) {
@@ -134,6 +135,11 @@ public class Main2Activity extends AppCompatActivity {
         String message = "Dear *" + name + "*,\n\nThank you for showing your interest in our Professional *"
                 + course + "* Course. \n\nWe Assure You to Deliver Quality Training.\n\n"
                 + "Thank you. \n\n CBitss Technologies";
+
+        if(transactionId!=null && !transactionId.equals(""))
+        {
+            message += "\n\n\nYou got Paytm Cashback on Your Paytm Number.";
+        }
 
         PackageManager packageManager = getPackageManager();
         Intent i = new Intent(Intent.ACTION_VIEW);

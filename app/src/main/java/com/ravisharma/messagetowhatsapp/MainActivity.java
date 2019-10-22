@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void generateUpiUrl(String upiId) {
         String name = name_edit.getText().toString().trim();
-        name.replaceAll("\\s+", "%20");
+        name = name.replaceAll("\\s+", "%20");
         uriUpi = "http://cbitss.pay?pn="+name+"&pa=" + upiId;
     }
 

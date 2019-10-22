@@ -41,7 +41,7 @@ public class ThankYouActivity extends AppCompatActivity {
     EditText pin;
     Button pin_btn;
 
-    String course, name, num1, num2, email, uri_upi;
+    String course, name, num1, num2, email, uri_upi, transactionId;
 
     DB db;
 
@@ -66,6 +66,7 @@ public class ThankYouActivity extends AppCompatActivity {
         course = bundle.getString("course");
         email = bundle.getString("email");
         uri_upi = bundle.getString("uri_upi");
+        transactionId = bundle.getString("trans_id");
 
         txt_name.setText(name);
 
@@ -140,6 +141,7 @@ public class ThankYouActivity extends AppCompatActivity {
                                 i.putExtra("num2", num2);
                                 i.putExtra("course", course);
                                 i.putExtra("uri_upi", uri_upi);
+                                i.putExtra("trans_id", transactionId);
                                 startActivity(i);
                                 finish();
 
